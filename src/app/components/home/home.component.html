@@ -1,0 +1,55 @@
+
+<div class="form">
+    <mat-form-field floatPlaceholder="never" color="accent">
+      <input matInput #filter placeholder="Filter issues">
+    </mat-form-field>
+</div>
+
+<mat-table #table [dataSource]="dataSource" matSort class="mat-cell"> 
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Direccion</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.address}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Monto</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.amount | currency}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orderNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Pedido</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.orderNumber}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paymentMethod">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Pago</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.paymentMethod}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tip">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Propina</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.tip | currency }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.date}}</mat-cell>
+      </ng-container>
+    <!-- actions -->
+    <ng-container matColumnDef="actions-">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" >
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="openDialog('0ms', '0ms', row)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>

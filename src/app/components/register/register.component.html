@@ -1,0 +1,46 @@
+<div class="container">
+    <form class="form" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <h1 class="form-title">Generar pedido</h1>
+        <section class="container-section">
+            <article>
+                <mat-form-field appearance="fill">
+                    <mat-label>Número de pedido</mat-label>
+                    <input formControlName="orderNumber" matInput placeholder="Ejemplo 3213">
+                </mat-form-field>
+            </article>
+            <article>
+                <mat-form-field appearance="fill">
+                    <mat-label>Dirección</mat-label>
+                    <input formControlName="address" matInput placeholder="Avenida Cordoba 3211">
+                </mat-form-field>
+            </article>
+            <article>
+                <mat-form-field appearance="fill">
+                    <mat-label>Total del pedido</mat-label>
+                    <input formControlName="amount" type="number" matInput placeholder="Ejemplo $25.000">
+                </mat-form-field>
+            </article>
+            <article>
+                <mat-form-field appearance="fill">
+                    <mat-label>Propina</mat-label>
+                    <input formControlName="tip" type="number" matInput placeholder="Ejemplo $250">
+                </mat-form-field>
+            </article>
+            <article>
+                <mat-form-field appearance="fill">
+                    <mat-label>Metodo de pago</mat-label>
+                    <mat-select formControlName="paymentMethod" disableRipple>
+                        <mat-option value="Efectivo">Efectivo</mat-option>
+                        <mat-option value="Mercado Pago">Mercado pago</mat-option>
+                        <mat-option value="QR">QR</mat-option>
+                        <mat-option value="Otros">Otros</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </article>
+            <article class="form-submit">
+                <button *ngIf="orderForm.valid" mat-raised-button color="primary">GUARDAR</button>
+                <button *ngIf="!orderForm.valid" disabled="true" mat-raised-button color="primary">GUARDAR</button>
+            </article>
+        </section>
+    </form>
+</div>

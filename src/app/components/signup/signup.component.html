@@ -1,0 +1,36 @@
+<div class="signup-container">
+    <div class="signup-content">
+        <mat-toolbar class="signup-toolbar" color="primary">Register</mat-toolbar>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill">
+                    <mat-icon matPrefix>email</mat-icon>
+                    <input formControlName="email"  type="email" matInput placeholder="Email *">
+                    <mat-error *ngIf="f.email.touched && f.email.errors || submitted && f.email.errors " class="invalid-feedback">
+                        <span *ngIf="f.email.errors.required">Email is required</span>
+                        <span *ngIf="f.email.errors.pattern">Must be a valid email address</span>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-icon matPrefix>person_outline</mat-icon>
+                    <input formControlName="username"  type="text" matInput placeholder="Username *" >
+                    <mat-error *ngIf="f.username.touched && f.username.errors || submitted && f.username.errors " class="invalid-feedback">
+                        <span *ngIf="f.username.errors.required">Username is required</span>
+                        <span *ngIf="f.username.errors.pattern">Must be a valid</span>
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill">
+                    <mat-icon matPrefix>lock_outline</mat-icon>
+                    <input formControlName="password" type="password" placeholder="Password *" autocomplete="false" matInput>
+                    <mat-error *ngIf="f.password.touched && f.password.errors || submitted && f.password.errors " class="invalid-feedback">
+                        <span *ngIf="f.password.errors.required">Password is required</span>
+                        <span *ngIf="f.password.errors.pattern">Must be a valid</span>
+                    </mat-error>
+                </mat-form-field>
+                <div class="signup-submit">
+                    <button class="btn-submit" type="submit" mat-raised-button color="primary">SEND</button>
+                </div>
+                
+            </form>
+    </div>
+</div>

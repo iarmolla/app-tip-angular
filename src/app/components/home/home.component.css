@@ -1,0 +1,23 @@
+  .mdc-data-table__table {
+    min-width: 100%;
+    border: 0;
+    white-space: nowrap;
+    border-spacing: 0;
+    table-layout: fixed;
+    height: 90vh;
+}
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+}
+mat-form-field {
+  width: 90vw;
+}

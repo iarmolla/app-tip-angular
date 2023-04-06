@@ -1,0 +1,39 @@
+/* Angular material */
+table {
+  width: 50%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.navbar {
+}
+
+.vertical-menu {
+}
+
+.mat-mdc-list-item-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+img {
+  height: 8%;
+  object-fit: contain;
+  position: absolute;
+  right: 0;
+  margin-right: 1rem;
+}
+
+.menu-logout {
+  position: absolute;
+  bottom: 5%;
+  left: 30%;
+}
+
+/* .navbar-title {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  right: 50%;
+} */
