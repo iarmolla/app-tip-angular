@@ -10,6 +10,8 @@ import { TipService } from 'src/app/services/tip.service';
 export class LoginComponent {
   registerForm: FormGroup;
   submitted = false;
+  error: string = ''
+  message: string = '';
   constructor(private tipServices: TipService) {
     this.registerForm = new FormGroup({
       email: new FormControl('',  [Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),Validators.required]),
@@ -17,11 +19,10 @@ export class LoginComponent {
     })
   }
   get f() { return this.registerForm.controls; }
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     this.submitted = true;
     if(this.registerForm.valid) {
-      this.tipServices.signIn(this.registerForm.value)
+      this.message = await this.tipServices.signIn(this.registerForm.value)
     }
-    // enviar a servicio
   }
 }

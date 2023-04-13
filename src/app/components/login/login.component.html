@@ -18,10 +18,12 @@
                         <span *ngIf="f.password.errors.pattern">Must be a valid</span>
                     </mat-error>
                 </mat-form-field>
+                <mat-error *ngIf="message != ''" class="invalid-feedback error-message">
+                    <span >{{message}}</span>
+                </mat-error>
                 <div class="signup-submit">
                     <button class="btn-submit" type="submit" mat-raised-button color="primary">SEND</button>
                 </div>
-                
             </form>
     </div>
 </div>
