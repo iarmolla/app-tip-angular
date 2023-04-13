@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // ******
 // ANGULAR MATERIAL
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
@@ -28,6 +29,9 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { DeleteComponent } from './components/dialogs/delete/delete.component';
+import { EditComponent } from './components/dialogs/edit/edit.component';
+import { TableComponent } from './components/table/table.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { DeleteComponent } from './components/dialogs/delete/delete.component';
     RegisterComponent,
     LoginComponent,
     SignupComponent,
-    DeleteComponent
+    DeleteComponent,
+    EditComponent,
+    TableComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +60,10 @@ import { DeleteComponent } from './components/dialogs/delete/delete.component';
     MatSidenavModule,
     MatListModule,
     ReactiveFormsModule,
+    FormsModule,
     MatCardModule,
     MatDialogModule,
+    MatPaginatorModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
