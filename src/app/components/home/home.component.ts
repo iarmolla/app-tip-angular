@@ -1,27 +1,37 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { TipService } from 'src/app/services/tip.service';
-import { MatSort } from '@angular/material/sort';
-import { DatePipe } from '@angular/common';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from '../dialogs/delete/delete.component';
-import { User } from 'src/app/interfaces/user';
+import { EditComponent } from '../dialogs/edit/edit.component';
+import { RegisterComponent } from '../register/register.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { Order } from 'src/app/interfaces/order';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-
-  displayedColumns: string[] = ['address','amount','orderNumber','paymentMethod','tip','date','actions-'];
-  dataSource:any
-  /**
-   *
-   */
+export class HomeComponent implements AfterViewInit {
+  query: any = ''
+  lado: string = ''
+  message: string = ''
+  displayedColumns: string[] = ['address', 'amount', 'orderNumber', 'paymentMethod', 'tip', 'date', 'actions-'];
+  dataSource = new MatTableDataSource<Order>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   constructor(private tipServices: TipService, public dialog: MatDialog) {
+    this.tipServices.getOrders().subscribe((data: any) => {
+      this.dataSource.data = data.orders;
+    })
   }
-
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, user: User): void {
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, user: any): void {
     this.dialog.open(DeleteComponent, {
       width: '250px',
       enterAnimationDuration,
@@ -30,16 +40,33 @@ export class HomeComponent implements OnInit {
         user
       }
     });
-
   }
-  ngOnInit(): void {
-    this.tipServices.getOrders().subscribe((data: any) => {
-      console.log(data)
-      this.dataSource = data
-      this.dataSource = this.dataSource[0]?.orders
-    })
+  edit(enterAnimationDuration: string, exitAnimationDuration: string, user: any): void {
+    this.dialog.open(EditComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        user
+      }
+    });
   }
-  delete(any: any) {
-    console.log(any)
+  addOrder(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(RegisterComponent, {
+      width: '350px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+  async search() {
+    const data = this.dataSource.data
+    const res = await this.tipServices.search(this.query, data)
+    if (res.message != '') {
+      this.message = res.message
+    } else {
+      this.tipServices.miSubject.next(res.data)
+      this.dataSource.data = res.data
+      this.message = ''
+    }
   }
 }
