@@ -16,7 +16,7 @@ export class DeleteComponent {
     data = data._ref.config.data
     this.data = data.user
   }
-  deleteOrder() {
-    this.tipServices.deleteOrder(this.data)
+  async deleteOrder() {
+    await this.tipServices.deleteOrder(this.data)
   }
 }
