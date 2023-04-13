@@ -5,13 +5,13 @@
             <article>
                 <mat-form-field appearance="fill">
                     <mat-label>Número de pedido</mat-label>
-                    <input formControlName="orderNumber" matInput placeholder="Ejemplo 3213">
+                    <input type="number" formControlName="orderNumber" matInput placeholder="Ejemplo 3213">
                 </mat-form-field>
             </article>
             <article>
                 <mat-form-field appearance="fill">
                     <mat-label>Dirección</mat-label>
-                    <input formControlName="address" matInput placeholder="Avenida Cordoba 3211">
+                    <input formControlName="address" matInput placeholder="Avenida Corrientes 3701">
                 </mat-form-field>
             </article>
             <article>
@@ -38,6 +38,7 @@
                 </mat-form-field>
             </article>
             <article class="form-submit">
+                <button mat-raised-button mat-dialog-close>Cancel</button>
                 <button *ngIf="orderForm.valid" mat-raised-button color="primary">GUARDAR</button>
                 <button *ngIf="!orderForm.valid" disabled="true" mat-raised-button color="primary">GUARDAR</button>
             </article>
