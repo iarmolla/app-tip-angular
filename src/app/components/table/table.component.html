@@ -1,0 +1,36 @@
+<div class="container-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Dirección</th>
+          <th scope="col">Monto</th>
+          <th scope="col">Pedido</th>
+          <th scope="col">Pago</th>
+          <th scope="col">Propina</th>
+          <th scope="col">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of dataObs$ |async">
+          <td data-label="Dirección">{{data.address}}</td>
+          <td data-label="Monto">{{data.amount}}</td>
+          <td data-label="Pedido">{{data.orderNumber}}</td>
+          <td data-label="Pago">{{data.paymentMethod}}</td>
+          <td data-label="Propina">{{data.tip}}</td>
+          <td data-label="Fecha">{{data.date}}</td>
+          <td data-label="actions" class="responsive-icons">
+            <button mat-icon-button color="primary" (click)="addOrder('0ms', '0ms')">
+              <mat-icon aria-label="Add">add</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="edit('0ms', '0ms', data)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="openDialog('0ms', '0ms', data)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" aria-label="Select page of dataSource"></mat-paginator>
+  </div>
