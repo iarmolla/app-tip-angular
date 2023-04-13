@@ -32,6 +32,7 @@ import { DeleteComponent } from './components/dialogs/delete/delete.component';
 import { EditComponent } from './components/dialogs/edit/edit.component';
 import { TableComponent } from './components/table/table.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     MatCardModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatSortModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
