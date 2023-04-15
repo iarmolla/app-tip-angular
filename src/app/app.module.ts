@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { LayoutModule } from '@angular/cdk/layout';
 // ******
 // ANGULAR MATERIAL
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -33,6 +33,11 @@ import { EditComponent } from './components/dialogs/edit/edit.component';
 import { TableComponent } from './components/table/table.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import {MatSortModule} from '@angular/material/sort';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { HelpComponent } from './components/help/help.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,10 @@ import {MatSortModule} from '@angular/material/sort';
     DeleteComponent,
     EditComponent,
     TableComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    NavbarComponent,
+    HelpComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +74,9 @@ import {MatSortModule} from '@angular/material/sort';
     MatDialogModule,
     MatPaginatorModule,
     MatSortModule,
+    LayoutModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
