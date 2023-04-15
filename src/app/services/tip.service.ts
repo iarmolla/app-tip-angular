@@ -18,6 +18,7 @@ export class TipService {
 	userId: any;
 	error: string = ''
 	miSubject = new BehaviorSubject<any>('')
+	isAuthenticated$ = new BehaviorSubject<any>(false)
 	constructor(private firestore: Firestore, private router: Router) {
 		this.getOrders().subscribe((data: any) => {
 			this.miSubject.next(data.orders)
@@ -30,7 +31,13 @@ export class TipService {
 	}
 	isAuthenticated() {
 		const isUserAuthenticated = window.localStorage.getItem('auth')
+		
 		return isUserAuthenticated ? isUserAuthenticated.length > 0 : this.auth
+	}
+	public getAuthenticationObservable(): any{
+		const isUserAuthenticated = window.localStorage.getItem('auth')
+		this.isAuthenticated$.next(isUserAuthenticated ? isUserAuthenticated.length > 0 : this.auth)
+		return this.isAuthenticated$;
 	}
 	async signIn(user: User) {
 		await this.getUser(user)
@@ -46,6 +53,8 @@ export class TipService {
 				this.userId = element.id
 				window.localStorage.setItem('auth', element.id)
 				window.localStorage.setItem('email', element.email)
+				window.localStorage.setItem('username', element.username)
+				this.isAuthenticated$.next(true)
 				this.router.navigate(['/']);
 				return element
 			} else {
@@ -102,9 +111,9 @@ export class TipService {
 	}
 	async search(query: any, data: any, options?: SearchOptions) {
 		if (query == '') {
-			const {orders} = await firstValueFrom(this.getOrders())
+			const { orders } = await firstValueFrom(this.getOrders())
 			this.miSubject.next(orders)
-			return { data:orders, message: "" };
+			return { data: orders, message: "" };
 		}
 		const { searchBy = Object.keys(data[0]) } = options ?? {};
 		const newData = data.filter((item: any) => {
@@ -114,8 +123,8 @@ export class TipService {
 			});
 		});
 		const message = newData.length > 0 ? "" : "No se encontraron datos que coincidan con la búsqueda";
-		if(message != '') {
-			this.miSubject.next(newData)		
+		if (message != '') {
+			this.miSubject.next(newData)
 		}
 		return { data: newData, message: message };
 	}
