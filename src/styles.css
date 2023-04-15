@@ -2,3 +2,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.light-theme {
+  --primary-color: #e5e5e5;
+  --background-color: #ffffff;
+  --text-color: #333333;
+}
+
+.dark-theme {
+  --primary-color: #232628;
+  --background-color: #222222;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.mat-toolbar {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
