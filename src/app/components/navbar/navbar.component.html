@@ -1,0 +1,62 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar>
+      <div class="profile">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Imagen de perfil del usuario">
+        <span class="item-text item-text-profile">{{username}}</span>
+      </div>
+    </mat-toolbar>
+    <mat-nav-list>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/">
+          <div class="item">
+            <mat-icon>home</mat-icon>
+            <span class="item-text">Inicio</span>
+          </div>
+        </a>       
+        <a mat-list-item href="#">
+          <div class="item" (click)="toggleDarkMode()">
+            <mat-icon>{{ darkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+            <span class="item-text">Modo oscuro</span>
+          </div>
+        </a>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>settings</mat-icon>
+                <span class="item-text">Ajustes</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <a mat-list-item (click)="profile('0ms', '0ms')">
+                <div class="item">
+                  <mat-icon>account_circle</mat-icon>
+                  <span class="item-text">Perfil</span>
+                </div>
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <a mat-list-item >
+          <div class="item">
+            <mat-icon matListIcon>help_outline</mat-icon>
+            <span class="item-text">Ayuda</span>
+          </div>
+        </a>
+      </mat-nav-list>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Tippit</span>
+    </mat-toolbar>
+    <div class="container">
+      <app-home></app-home>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

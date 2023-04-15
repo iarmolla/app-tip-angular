@@ -1,0 +1,99 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.container {
+  margin: 10px;
+}
+
+@media (max-width: 600px) {
+  .sidenav {
+    width: 200px;
+  }
+}
+
+
+/* gpt */
+
+.mat-icon-grey {
+  color: #9e9e9e;
+  /* Color gris claro */
+}
+
+.mat-nav-list {
+  padding-top: 20px;
+}
+
+.mat-list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #444;
+}
+
+.mat-list-item:hover {
+  background-color: #eee;
+  color: #333;
+}
+
+.mat-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #777;
+}
+
+.item-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mat-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  display: flex;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.item-text:hover {
+  color: #ff4081;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.profile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.item-text-profile {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #646262;
+}
+.mat-expansion-panel {
+  box-shadow: none;
+  border: none;
+}
+
+.mat-expansion-panel-header {
+  padding: 0 16px;
+}
