@@ -31,7 +31,6 @@ export class TipService {
 	}
 	isAuthenticated() {
 		const isUserAuthenticated = window.localStorage.getItem('auth')
-		
 		return isUserAuthenticated ? isUserAuthenticated.length > 0 : this.auth
 	}
 	public getAuthenticationObservable(): any{
@@ -86,8 +85,7 @@ export class TipService {
 	async update(id: any, order: Order) {
 		const userRef = doc(this.firestore, `users/${id}`);
 		const user = await firstValueFrom(this.getUserById(id))
-		console.log(user)
-		console.log(order)
+		
 		user.orders.forEach((data: Order) => {
 			if (order.date === data.date) {
 				data.orderNumber = order.orderNumber
@@ -127,5 +125,13 @@ export class TipService {
 			this.miSubject.next(newData)
 		}
 		return { data: newData, message: message };
+	}
+	async updateUser(id: any, data: any) {
+		const userRef = doc(this.firestore, `users/${id}`);
+		let user = await firstValueFrom(this.getUserById(id))
+		user.email = data.email
+		user.username = data.username
+		user.password = data.password
+		return await updateDoc(userRef, { ...user });
 	}
 }
