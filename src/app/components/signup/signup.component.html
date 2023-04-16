@@ -6,16 +6,16 @@
                     <mat-icon matPrefix>email</mat-icon>
                     <input formControlName="email"  type="email" matInput placeholder="Email *">
                     <mat-error *ngIf="f.email.touched && f.email.errors || submitted && f.email.errors " class="invalid-feedback">
-                        <span *ngIf="f.email.errors.required">Email is required</span>
-                        <span *ngIf="f.email.errors.pattern">Must be a valid email address</span>
+                        <span *ngIf="f.email.errors.required">Email es requerido</span>
+                        <span *ngIf="f.email.errors.pattern">Debe ser una dirección de email</span>
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-icon matPrefix>person_outline</mat-icon>
                     <input formControlName="username"  type="text" matInput placeholder="Username *" >
                     <mat-error *ngIf="f.username.touched && f.username.errors || submitted && f.username.errors " class="invalid-feedback">
-                        <span *ngIf="f.username.errors.required">Username is required</span>
-                        <span *ngIf="f.username.errors.pattern">Must be a valid</span>
+                        <span *ngIf="f.username.errors.required">Nombre de usuario requerido</span>
+                        <span *ngIf="f.username.errors.pattern">Minimo 4 caracteres</span>
                     </mat-error>
                 </mat-form-field>
                 
@@ -23,8 +23,8 @@
                     <mat-icon matPrefix>lock_outline</mat-icon>
                     <input formControlName="password" type="password" placeholder="Password *" autocomplete="false" matInput>
                     <mat-error *ngIf="f.password.touched && f.password.errors || submitted && f.password.errors " class="invalid-feedback">
-                        <span *ngIf="f.password.errors.required">Password is required</span>
-                        <span *ngIf="f.password.errors.pattern">Must be a valid</span>
+                        <span *ngIf="f.password.errors.required">La contraseña es requerida</span>
+                        <span *ngIf="f.password.errors.pattern">La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número</span>
                     </mat-error>
                 </mat-form-field>
                 <div class="signup-submit">

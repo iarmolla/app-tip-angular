@@ -23,7 +23,6 @@ export class SignupComponent implements OnInit  {
   get f() { return this.registerForm.controls; }
   async onSubmit() {
     this.submitted = true;
-    // enviar a servicio
     if (this.registerForm.valid) {
       this.tipServices.signUp(this.registerForm.value)
     }
