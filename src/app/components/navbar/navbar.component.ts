@@ -4,6 +4,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ProfileComponent } from '../profile/profile.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { TipService } from 'src/app/services/tip.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,14 +18,14 @@ export class NavbarComponent {
   isLoggedIn: boolean = false;
   help: boolean = false
   public darkMode = false;
-  constructor(private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog) {
+  constructor(private tipService: TipService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog, private router: Router) {
     this.isHandset$ = this.breakpointObserver.observe([Breakpoints.HandsetPortrait, Breakpoints.HandsetLandscape])
       .pipe(
         map(result => result.matches)
       );
-    const email = window.localStorage.getItem('email')
-    if (email != null) {
-      this.username = email
+    const username = window.localStorage.getItem('username')
+    if (username != null) {
+      this.username = username
     }
   }
   ngOnInit() {
@@ -38,6 +40,11 @@ export class NavbarComponent {
       enterAnimationDuration,
       exitAnimationDuration,
     });
+  }
+  logout() {
+    window.localStorage.clear()
+    this.tipService.isAuthenticated$.next(false)
+    this.router.navigate(['/login']);
   }
   toggleDarkMode(): void {
     this.themeService.darkMode = !this.darkMode;
