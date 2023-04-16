@@ -5,6 +5,7 @@ form {
   flex-direction: column;
   justify-content: center;
   padding: 1rem;
+  gap: 1rem;
 }
 
 .profile-picture-container {
@@ -33,4 +34,12 @@ form {
 
 .form-title {
   color: #646262;
+}
+
+.form-submit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
