@@ -10,13 +10,14 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    this.tipServices.isAuthenticated$.subscribe()
     const isAuthenticated = this.tipServices.isAuthenticated()
-    if(!isAuthenticated) {
-				this.router.navigate(['/login']);
-        return false
+    if (!isAuthenticated) {
+      this.router.navigate(['/login']);
+      return false
     } else {
       return true
     }
   }
-  constructor(private tipServices: TipService, private router: Router) {}
+  constructor(private tipServices: TipService, private router: Router) { }
 }
