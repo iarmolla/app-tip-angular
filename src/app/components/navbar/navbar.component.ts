@@ -6,6 +6,7 @@ import { ProfileComponent } from '../profile/profile.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TipService } from 'src/app/services/tip.service';
+import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,8 @@ export class NavbarComponent {
   isLoggedIn: boolean = false;
   help: boolean = false
   public darkMode = false;
-  constructor(private tipService: TipService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog, private router: Router) {
+  profilePicture: any;
+  constructor(private imageService: ImagesService ,private tipService: TipService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog, private router: Router) {
     this.isHandset$ = this.breakpointObserver.observe([Breakpoints.HandsetPortrait, Breakpoints.HandsetLandscape])
       .pipe(
         map(result => result.matches)
@@ -29,6 +31,9 @@ export class NavbarComponent {
     }
   }
   ngOnInit() {
+    this.imageService.image$.subscribe((value: string) => {
+      this.profilePicture = value
+    })
     this.themeService._darkMode.subscribe((value) => {
       this.darkMode = value;
     });

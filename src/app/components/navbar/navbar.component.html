@@ -3,7 +3,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-toolbar>
       <div class="profile">
-        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Imagen de perfil del usuario">
+        <img src={{profilePicture}} alt="Imagen de perfil del usuario">
         <span class="item-text item-text-profile">{{username}}</span>
       </div>
     </mat-toolbar>
@@ -15,8 +15,8 @@
             <span class="item-text">Inicio</span>
           </div>
         </a>       
-        <a mat-list-item href="#">
-          <div class="item" (click)="toggleDarkMode()">
+        <a mat-list-item href="#" (click)="toggleDarkMode()">
+          <div class="item" >
             <mat-icon>{{ darkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
             <span class="item-text">Modo oscuro</span>
           </div>
