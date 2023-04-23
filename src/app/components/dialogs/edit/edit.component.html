@@ -5,9 +5,13 @@
     <form class="mat-dialog-content" [formGroup]="orderForm">
         <div class="form">
             <mat-form-field color="accent">
-                <mat-label>Numero de pedido</mat-label>
+                <mat-label>Número de pedido</mat-label>
                 <input type="number" formControlName="orderNumber" matInput class="form-control" placeholder="Ejemplo 32" name="orderNumber" required
                     value="{{data.orderNumber}}">
+                    <mat-error *ngIf="f.orderNumber.touched && f.orderNumber.errors || submitted && f.orderNumber.errors " class="invalid-feedback">
+                        <span *ngIf="f.orderNumber.errors.required">Número de pedido requerido</span>
+                        <span *ngIf="f.orderNumber.errors.pattern">Solamente números</span>
+                    </mat-error>
             </mat-form-field>
         </div>
         <div class="form">
@@ -15,6 +19,9 @@
                 <mat-label>Dirección</mat-label>
                 <input formControlName="address" matInput class="form-control" placeholder="Avenida Corrientes 3701" name="address" required
                     value="{{data.address}}">
+                    <mat-error *ngIf="f.address.touched && f.address.errors || submitted && f.address.errors " class="invalid-feedback">
+                        <span *ngIf="f.address.errors.required">Dirección requerida</span>
+                    </mat-error>
             </mat-form-field>
         </div>
         <div class="form">
@@ -22,11 +29,15 @@
                 <mat-label>Monto</mat-label>
                 <input type="number" formControlName="amount" matInput class="form-control" placeholder="$4500" name="amount" required
                     value="{{data.amount | currency}}">
+                    <mat-error *ngIf="f.amount.touched && f.amount.errors || submitted && f.amount.errors " class="invalid-feedback">
+                        <span *ngIf="f.amount.errors.required">Monto requerido</span>
+                        <span *ngIf="f.amount.errors.pattern">Solamente números</span>
+                    </mat-error>
             </mat-form-field>
         </div>
         <div class="form">
             <mat-form-field appearance="fill" color="accent">
-                <mat-label>Metodo de pago</mat-label>
+                <mat-label>Método de pago</mat-label>
                 <mat-select formControlName="paymentMethod" disableRipple [(value)]="data.paymentMethod">
                     <mat-option value="Efectivo">Efectivo</mat-option>
                     <mat-option value="Mercado Pago">Mercado pago</mat-option>
@@ -36,8 +47,8 @@
             </mat-form-field>
         </div>
         <div mat-dialog-actions>
-            <button mat-button mat-dialog-close>Cancel</button>
-            <button mat-raised-button [mat-dialog-close]="1" color="primary" (click)="onSubmit()">Save</button>
+            <button mat-button mat-dialog-close>Cancelar</button>
+            <button mat-raised-button  color="primary" (click)="onSubmit()">Guardar</button>
         </div>
     </form>
 </div>

@@ -6,24 +6,40 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Número de pedido</mat-label>
                     <input type="number" formControlName="orderNumber" matInput placeholder="Ejemplo 3213">
+                    <mat-error *ngIf="f.orderNumber.touched && f.orderNumber.errors || submitted && f.orderNumber.errors " class="invalid-feedback">
+                        <span *ngIf="f.orderNumber.errors.required">Campo requerido</span>
+                        <span *ngIf="f.orderNumber.errors.pattern">Solamente números</span>
+                    </mat-error>
                 </mat-form-field>
             </article>
             <article>
                 <mat-form-field appearance="fill">
                     <mat-label>Dirección</mat-label>
                     <input formControlName="address" matInput placeholder="Avenida Corrientes 3701">
+                    <mat-error *ngIf="f.address.touched && f.address.errors || submitted && f.address.errors " class="invalid-feedback">
+                        <span *ngIf="f.address.errors.required">Campo requerido</span>
+                        <span *ngIf="f.address.errors.pattern">Solamente letras</span>
+                    </mat-error>
                 </mat-form-field>
             </article>
             <article>
                 <mat-form-field appearance="fill">
                     <mat-label>Total del pedido</mat-label>
                     <input formControlName="amount" type="number" matInput placeholder="Ejemplo $25.000">
+                    <mat-error *ngIf="f.amount.touched && f.amount.errors || submitted && f.amount.errors " class="invalid-feedback">
+                        <span *ngIf="f.amount.errors.required">Campo requerido</span>
+                        <span *ngIf="f.amount.errors.pattern">Solamente números</span>
+                    </mat-error>
                 </mat-form-field>
             </article>
             <article>
                 <mat-form-field appearance="fill">
                     <mat-label>Propina</mat-label>
                     <input formControlName="tip" type="number" matInput placeholder="Ejemplo $250">
+                    <mat-error *ngIf="f.tip.touched && f.tip.errors || submitted && f.tip.errors " class="invalid-feedback">
+                        <span *ngIf="f.tip.errors.required">Campo requerido</span>
+                        <span *ngIf="f.tip.errors.pattern">Solamente números</span>
+                    </mat-error>
                 </mat-form-field>
             </article>
             <article>
@@ -35,6 +51,9 @@
                         <mat-option value="QR">QR</mat-option>
                         <mat-option value="Otros">Otros</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="f.paymentMethod.touched && f.paymentMethod.errors || submitted && f.paymentMethod.errors " class="invalid-feedback">
+                        <span *ngIf="f.paymentMethod.errors.required">Completar campo</span>
+                    </mat-error>
                 </mat-form-field>
             </article>
             <article class="form-submit">

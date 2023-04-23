@@ -12,15 +12,16 @@ import { TipService } from 'src/app/services/tip.service';
 export class EditComponent {
   data: Order
   orderForm: FormGroup
+  submitted = false;
   constructor(public dialogRef: MatDialogRef<EditComponent>, private tipServices: TipService) {
     let data: any = dialogRef
     data = data._ref.config.data
     this.data = data.user
     this.orderForm = new FormGroup({
-      orderNumber: new FormControl(this.data.orderNumber,Validators.required),
-      address: new FormControl(this.data.address,Validators.required),
-      amount: new FormControl(this.data.amount, [ Validators.pattern('^[0-9]+$'), Validators.required]),
-      tip: new FormControl(this.data.tip, [ Validators.pattern('^[0-9]+$'), Validators.required]),
+      orderNumber: new FormControl(this.data.orderNumber, Validators.required),
+      address: new FormControl(this.data.address, Validators.required),
+      amount: new FormControl(this.data.amount, [Validators.pattern('^[0-9]+$'), Validators.required]),
+      tip: new FormControl(this.data.tip, [Validators.pattern('^[0-9]+$'), Validators.required]),
       paymentMethod: new FormControl(this.data.paymentMethod, [Validators.required]),
       date: new FormControl(this.data.date),
     })
@@ -28,8 +29,13 @@ export class EditComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  get f() { return this.orderForm.controls; }
   async onSubmit() {
-    const id = window.localStorage.getItem('auth')
-    await this.tipServices.update(id, this.orderForm.value)
+    this.submitted = true;
+    if(this.orderForm.valid) {
+      const id = window.localStorage.getItem('auth')
+      await this.tipServices.update(id, this.orderForm.value)
+      this.onNoClick()
+    }
   }
 }

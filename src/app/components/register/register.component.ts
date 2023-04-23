@@ -10,9 +10,8 @@ import { TipService } from 'src/app/services/tip.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
+  submitted = false;
   orderForm: FormGroup
-
   constructor(public dialogRef: MatDialogRef<RegisterComponent>, private tipService: TipService) {
     this.orderForm = new FormGroup({
       orderNumber: new FormControl('', [Validators.pattern('^[0-9]+$'), Validators.required]),
@@ -22,8 +21,9 @@ export class RegisterComponent {
       paymentMethod: new FormControl('', [Validators.required]),
     })
   }
-
+  get f() { return this.orderForm.controls; }
   onSubmit(): void {
+    this.submitted = true;
     if (this.orderForm.valid) {
       this.tipService.addOrder(this.orderForm.value)
       this.dialogRef.close();
