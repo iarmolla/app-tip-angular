@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, updateDoc, docData } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, updateDoc, docData, Timestamp, where, query, getDocs } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, Subject, firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from "../interfaces/user"
@@ -33,7 +33,7 @@ export class TipService {
 		const isUserAuthenticated = window.localStorage.getItem('auth')
 		return isUserAuthenticated ? isUserAuthenticated.length > 0 : this.auth
 	}
-	public getAuthenticationObservable(): any{
+	public getAuthenticationObservable(): any {
 		const isUserAuthenticated = window.localStorage.getItem('auth')
 		this.isAuthenticated$.next(isUserAuthenticated ? isUserAuthenticated.length > 0 : this.auth)
 		return this.isAuthenticated$;
@@ -78,14 +78,14 @@ export class TipService {
 		const id: any = this.userId || window.localStorage.getItem('auth')
 		const user = await firstValueFrom(this.getUserById(id))
 		let newOrder = user
-		order.date = this.pipe.transform(Date.now(), 'M/d/yy, h:mm a')
+		order.date = this.pipe.transform(Date.now(), 'M/d/yy')
 		newOrder?.orders?.push(order)
 		return updateDoc(orderRef, { ...newOrder })
 	}
 	async update(id: any, order: Order) {
 		const userRef = doc(this.firestore, `users/${id}`);
 		const user = await firstValueFrom(this.getUserById(id))
-		
+
 		user.orders.forEach((data: Order) => {
 			if (order.date === data.date) {
 				data.orderNumber = order.orderNumber
