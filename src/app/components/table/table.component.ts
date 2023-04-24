@@ -27,6 +27,7 @@ export class TableComponent implements OnInit {
   constructor(private _changeDetectorRef: ChangeDetectorRef, private tipServices: TipService, public dialog: MatDialog, private ngZone: NgZone) {}
   async ngOnInit() {
     this.tipServices.miSubject.subscribe((data) => {
+      console.log(data)
         if(data.length !==0) {
           this.setPagination(data);
         } 
