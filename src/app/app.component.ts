@@ -23,9 +23,6 @@ export class AppComponent implements OnInit {
     } else {
       this.tipService.isAuthenticated$.subscribe((data) => {
         this.isLoggedIn = data
-        if (!this.isLoggedIn) {
-          this.router.navigate(['/login']);
-        }
       })
     }
   }
