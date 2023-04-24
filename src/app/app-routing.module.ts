@@ -5,11 +5,12 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, ...canActivate(() => redirectUnauthorizedTo(['/login']))},
   { path: '**', component: PagenotfoundComponent}
 
 ];
