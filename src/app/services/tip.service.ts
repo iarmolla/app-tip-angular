@@ -18,16 +18,22 @@ export class TipService {
 	userId: any;
 	error: string = ''
 	miSubject = new BehaviorSubject<any>('')
+	
 	isAuthenticated$ = new BehaviorSubject<any>(false)
 	constructor(private firestore: Firestore, private router: Router) {
+		console.log('constructor!')
 		this.getOrders().subscribe((data: any) => {
+			console.log(data.orders)
 			this.miSubject.next(data.orders)
 		})
 	}
 	signUp(user: User) {
+		const newUser = {
+			email: user.email,
+			orders: user.orders = []
+		}
 		const orderRef = collection(this.firestore, 'users')
-		user.orders = []
-		return addDoc(orderRef, user)
+		return addDoc(orderRef, newUser)
 	}
 	isAuthenticated() {
 		const isUserAuthenticated = window.localStorage.getItem('auth')
@@ -45,9 +51,9 @@ export class TipService {
 	}
 	async getUser(user: User) {
 		const data: any = await firstValueFrom(this.getUsers())
-		const { email, password } = user
+		const { email } = user
 		data?.forEach((element: any) => {
-			if (element.email == email && element.password == password) {
+			if (element.email == email) {
 				this.auth = true
 				this.userId = element.id
 				window.localStorage.setItem('auth', element.id)
@@ -71,6 +77,9 @@ export class TipService {
 	}
 	getOrders() {
 		const ref = doc(this.firestore, `users/${window.localStorage.getItem('auth')}`);
+		docData(ref, { idField: 'id'}).subscribe((data: any) => {
+			this.miSubject.next(data.orders)
+		})
 		return docData(ref, { idField: 'id' })
 	}
 	async addOrder(order: Order) {
@@ -125,13 +134,5 @@ export class TipService {
 			this.miSubject.next(newData)
 		}
 		return { data: newData, message: message };
-	}
-	async updateUser(id: any, data: any) {
-		const userRef = doc(this.firestore, `users/${id}`);
-		let user = await firstValueFrom(this.getUserById(id))
-		user.email = data.email
-		user.username = data.username
-		user.password = data.password
-		return await updateDoc(userRef, { ...user });
 	}
 }
