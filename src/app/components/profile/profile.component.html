@@ -5,14 +5,6 @@
         <input type="file" #fileInput (change)="onFileSelected($event)">
     </div>
     <mat-form-field appearance="outline">
-        <mat-label>Nombre de usuario</mat-label>
-        <input formControlName="username" matInput placeholder="Ingrese su nombre de usuario">
-        <mat-error *ngIf="f.username.touched && f.username.errors || submitted && f.username.errors " class="invalid-feedback">
-            <span *ngIf="f.username.errors.required">El nombre de usuario es un campo requerido</span>
-            <span *ngIf="f.username.errors.pattern">Minimo 4 caracteres</span>
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
         <mat-label>Correo electrónico</mat-label>
         <input formControlName="email" matInput placeholder="Ingrese su correo electrónico">
         <mat-error *ngIf="f.email.touched && f.email.errors || submitted && f.email.errors " class="invalid-feedback">
@@ -22,10 +14,18 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
-        <input formControlName="password" matInput type="password" placeholder="Ingrese su nueva contraseña">
+        <input formControlName="password" matInput type="password" placeholder="Ingrese su contraseña">
         <mat-error *ngIf="f.password.touched && f.password.errors || submitted && f.password.errors " class="invalid-feedback">
             <span *ngIf="f.password.errors.required">La contraseña es un campo requerido</span>
             <span *ngIf="f.password.errors.pattern">La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número</span>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Nueva contraseña</mat-label>
+        <input formControlName="newPassword" matInput type="password" placeholder="Ingrese su nueva contraseña">
+        <mat-error *ngIf="f.newPassword.touched && f.newPassword.errors || submitted && f.newPassword.errors " class="invalid-feedback">
+            <span *ngIf="f.newPassword.errors.required">La contraseña es un campo requerido</span>
+            <span *ngIf="f.newPassword.errors.pattern">La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número</span>
         </mat-error>
     </mat-form-field>
     <div class="form-submit">
