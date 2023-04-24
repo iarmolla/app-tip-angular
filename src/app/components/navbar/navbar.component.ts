@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TipService } from 'src/app/services/tip.service';
 import { ImagesService } from 'src/app/services/images.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,20 +15,20 @@ import { ImagesService } from 'src/app/services/images.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  username: string = ''
+  email: string = ''
   isHandset$
   isLoggedIn: boolean = false;
   help: boolean = false
   public darkMode = false;
   profilePicture: any;
-  constructor(private imageService: ImagesService ,private tipService: TipService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog, private router: Router) {
+  constructor(private imageService: ImagesService, private authService: AuthService, private tipService: TipService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog, private router: Router) {
     this.isHandset$ = this.breakpointObserver.observe([Breakpoints.HandsetPortrait, Breakpoints.HandsetLandscape])
       .pipe(
         map(result => result.matches)
       );
-    const username = window.localStorage.getItem('username')
-    if (username != null) {
-      this.username = username
+    const email = window.localStorage.getItem('email')
+    if (email != null) {
+      this.email = email
     }
   }
   ngOnInit() {
@@ -40,7 +41,7 @@ export class NavbarComponent {
   }
   profile(enterAnimationDuration: string, exitAnimationDuration: string) {
     this.dialog.open(ProfileComponent, {
-      width: '40%',
+      width: '70%',
       height: '70vh',
       enterAnimationDuration,
       exitAnimationDuration,
@@ -49,7 +50,9 @@ export class NavbarComponent {
   logout() {
     window.localStorage.clear()
     this.tipService.isAuthenticated$.next(false)
-    this.router.navigate(['/login']);
+    this.authService.logout().then(() => {
+      window.location.href = '/login'
+    })
   }
   toggleDarkMode(): void {
     this.themeService.darkMode = !this.darkMode;

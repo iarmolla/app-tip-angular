@@ -4,7 +4,7 @@
     <mat-toolbar>
       <div class="profile">
         <img src={{profilePicture}} alt="Imagen de perfil del usuario">
-        <span class="item-text item-text-profile">{{username}}</span>
+        <span class="item-text item-text-profile">{{email}}</span>
       </div>
     </mat-toolbar>
     <mat-nav-list>
@@ -15,7 +15,7 @@
             <span class="item-text">Inicio</span>
           </div>
         </a>       
-        <a mat-list-item href="#" (click)="toggleDarkMode()">
+        <a mat-list-item (click)="toggleDarkMode()">
           <div class="item" >
             <mat-icon>{{ darkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
             <span class="item-text">Modo oscuro</span>
