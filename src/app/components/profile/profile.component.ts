@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { TipService } from 'src/app/services/tip.service';
 
@@ -13,11 +14,11 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup
   profilePicture: any
   submitted = false;
-  constructor(private imageService: ImagesService, public dialogRef: MatDialogRef<ProfileComponent>, private tipService: TipService) {
+  constructor(private authService: AuthService ,private imageService: ImagesService, public dialogRef: MatDialogRef<ProfileComponent>, private tipService: TipService) {
     this.profileForm = new FormGroup({
       email: new FormControl(window.localStorage.getItem('email'), [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'), Validators.required]),
-      username: new FormControl(window.localStorage.getItem('username'), [Validators.pattern('^.{4,}$'), Validators.required]),
       password: new FormControl('', [Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/), Validators.required]),
+      newPassword: new FormControl('', [Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/), Validators.required]),
     })
   }
   ngOnInit(): void {
@@ -39,7 +40,17 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.profileForm.valid) {
-      this.tipService.updateUser(window.localStorage.getItem('auth'), this.profileForm.value)
+      const { email, password, newPassword } = this.profileForm.value
+      const user = {
+        email,
+        password
+      }
+      this.authService.updatePassword(user, newPassword).then((res) => {
+        console.log(res)
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
+
 }
