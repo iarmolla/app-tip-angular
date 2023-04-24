@@ -49,7 +49,7 @@ export class TipService {
 		!this.auth ? this.error = 'El email o la contraseña es incorrecta' : ''
 		return this.error
 	}
-	async getUser(user: User) {
+	async getUser(user: any) {
 		const data: any = await firstValueFrom(this.getUsers())
 		const { email } = user
 		data?.forEach((element: any) => {

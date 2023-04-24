@@ -33,10 +33,12 @@ export class LoginComponent {
       })
     }
   }
-  loginWithGoogle() {
+  async loginWithGoogle() {
+    // this.message = await this.tipServices.signIn(this.registerForm.value)
     this.authService.loginWithGoogle().then((res) => {
+      console.log(res.user)
       this.message = ''
-      this.router.navigate(['/'])
+      this.tipServices.getUser(res.user).then(() => this.router.navigate(['/']))
     }).catch((error) => {
       this.message = 'Ocurrio un error al iniciar sesión con Google'
     })
