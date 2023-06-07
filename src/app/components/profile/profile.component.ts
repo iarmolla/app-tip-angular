@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getIdToken } from '@angular/fire/auth';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,6 +15,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup
   profilePicture: any
   submitted = false;
+  profileImage: any
   constructor(private authService: AuthService ,private imageService: ImagesService, public dialogRef: MatDialogRef<ProfileComponent>, private tipService: TipService) {
     this.profileForm = new FormGroup({
       email: new FormControl(window.localStorage.getItem('email'), [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'), Validators.required]),
@@ -43,12 +45,14 @@ export class ProfileComponent implements OnInit {
       const { email, password, newPassword } = this.profileForm.value
       const user = {
         email,
-        password
+        password,
       }
       this.authService.updatePassword(user, newPassword).then((res) => {
         console.log(res)
+        console.log('contraseña actualizada!');
       }).catch((error) => {
-        console.log(error)
+        console.log(error);
+        console.log('error al actualizar contraseña')
       })
     }
   }
