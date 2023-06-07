@@ -109,7 +109,7 @@
   }
   
   .padding-bottom--24 {
-    padding-bottom: 24px;
+    padding-bottom: 16px;
   }
   
   .padding-horizontal--48 {
@@ -272,6 +272,7 @@
   }
   
   .btn-submit {
+    margin-top: .5rem;
     background-color: #5469d4 !important;
   }
   
