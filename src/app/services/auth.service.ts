@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, updatePassword } from '@angular/fire/auth'
-
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, updatePassword, sendPasswordResetEmail } from '@angular/fire/auth'
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +19,13 @@ export class AuthService {
   logout() {
     return signOut(this.auth)
   }
-  updatePassword(user: any, newPassword: any) {
-    // console.log(user)
-    // console.log(newPassword)
-    // return updatePassword(user, newPassword)
-    return updatePassword(user, newPassword)
+  forgotPassword(email: string) {
+    return sendPasswordResetEmail(this.auth, email)
+  }
+  async updatePassword(user: any, newPassword: string) {
+    const currentUser = this.auth.currentUser
+    if(currentUser != null) {
+      updatePassword(currentUser, newPassword).then( res  => console.log(res)).catch(error => console.log(error))
+    }
   }
 }
