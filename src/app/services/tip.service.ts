@@ -18,13 +18,16 @@ export class TipService {
 	userId: any;
 	error: string = ''
 	miSubject = new BehaviorSubject<any>('')
-	
+
 	isAuthenticated$ = new BehaviorSubject<any>(false)
 	constructor(private firestore: Firestore, private router: Router) {
 		console.log('constructor!')
 		this.getOrders().subscribe((data: any) => {
-			console.log(data.orders)
-			this.miSubject.next(data.orders)
+			if (data != undefined) {
+				if ('orders' in data) {
+					this.miSubject.next(data.orders)
+				}
+			}
 		})
 	}
 	signUp(user: User) {
@@ -77,8 +80,12 @@ export class TipService {
 	}
 	getOrders() {
 		const ref = doc(this.firestore, `users/${window.localStorage.getItem('auth')}`);
-		docData(ref, { idField: 'id'}).subscribe((data: any) => {
-			this.miSubject.next(data.orders)
+		docData(ref, { idField: 'id' }).subscribe((data: any) => {
+			if (data != undefined) {
+				if ('orders' in data) {
+					this.miSubject.next(data.orders)
+				}
+			}
 		})
 		return docData(ref, { idField: 'id' })
 	}
