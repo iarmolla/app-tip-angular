@@ -13,10 +13,10 @@
       <tbody>
         <tr *ngFor="let data of dataObs$ |async">
           <td data-label="Dirección">{{data.address}}</td>
-          <td data-label="Monto">{{data.amount}}</td>
+          <td data-label="Monto">{{data.amount | currency}}</td>
           <td data-label="Pedido">{{data.orderNumber}}</td>
           <td data-label="Pago">{{data.paymentMethod}}</td>
-          <td data-label="Propina">{{data.tip}}</td>
+          <td data-label="Propina">{{data.tip | currency}}</td>
           <td data-label="Fecha">{{data.date}}</td>
           <td data-label="actions" class="responsive-icons">
             <button mat-icon-button color="primary" (click)="addOrder('0ms', '0ms')">
