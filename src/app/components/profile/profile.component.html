@@ -17,14 +17,13 @@
         <input formControlName="password" matInput type="password" placeholder="Ingrese su contraseña">
         <mat-error *ngIf="f.password.touched && f.password.errors || submitted && f.password.errors " class="invalid-feedback">
             <span *ngIf="f.password.errors.required">La contraseña es un campo requerido</span>
-            <span *ngIf="f.password.errors.pattern">La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número</span>
         </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Nueva contraseña</mat-label>
         <input formControlName="newPassword" matInput type="password" placeholder="Ingrese su nueva contraseña">
         <mat-error *ngIf="f.newPassword.touched && f.newPassword.errors || submitted && f.newPassword.errors " class="invalid-feedback">
-            <span *ngIf="f.newPassword.errors.required">La contraseña es un campo requerido</span>
+            <span *ngIf="f.newPassword.errors.required">La nueva contraseña es un campo requerido</span>
             <span *ngIf="f.newPassword.errors.pattern">La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número</span>
         </mat-error>
     </mat-form-field>
