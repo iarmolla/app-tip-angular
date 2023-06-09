@@ -22,10 +22,16 @@ export class AuthService {
   forgotPassword(email: string) {
     return sendPasswordResetEmail(this.auth, email)
   }
-  async updatePassword(user: any, newPassword: string) {
+  async updatePassword(newPassword: string) {
     const currentUser = this.auth.currentUser
-    if(currentUser != null) {
-      updatePassword(currentUser, newPassword).then( res  => console.log(res)).catch(error => console.log(error))
+    console.log(currentUser);
+    if (currentUser != null) {
+      try {
+        return await updatePassword(currentUser, newPassword)
+      } catch {
+        const error = 'Ocurrió un error al cambiar al actualizar la contraseña'
+        return error
+      }
     }
   }
 }
