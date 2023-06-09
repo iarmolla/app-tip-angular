@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { TipService } from 'src/app/services/tip.service';
 import { EditComponent } from '../dialogs/edit/edit.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,15 +23,15 @@ import { RegisterComponent } from '../register/register.component';
 export class TableComponent implements OnInit {
   dataSource!: MatTableDataSource<Order[]>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  dataObs$!: Observable<any>;
-  constructor(private _changeDetectorRef: ChangeDetectorRef, private tipServices: TipService, public dialog: MatDialog, private ngZone: NgZone) {}
+  // dataObs$!: Observable<any>;
+  dataObs$ = new BehaviorSubject<any>(false)
+
+  constructor(private _changeDetectorRef: ChangeDetectorRef, private tipServices: TipService, public dialog: MatDialog, private ngZone: NgZone) { }
   async ngOnInit() {
     this.tipServices.miSubject.subscribe((data) => {
       console.log(data)
-        if(data.length !==0) {
-          this.setPagination(data);
-        } 
-      })
+      this.setPagination(data);
+    })
   }
   setPagination(tableData: any) {
     this.dataSource = new MatTableDataSource<any>(tableData);
