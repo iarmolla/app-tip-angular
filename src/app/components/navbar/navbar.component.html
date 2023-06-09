@@ -3,7 +3,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-toolbar>
       <div class="profile">
-        <img src={{profilePicture}} alt="Imagen de perfil del usuario">
+        <img src={{profilePicture}} alt="Imagen de perfil">
         <span class="item-text item-text-profile">{{email}}</span>
       </div>
     </mat-toolbar>
@@ -15,12 +15,12 @@
             <span class="item-text">Inicio</span>
           </div>
         </a>       
-        <a mat-list-item (click)="toggleDarkMode()">
+        <!-- <a mat-list-item (click)="toggleDarkMode()">
           <div class="item" >
             <mat-icon>{{ darkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
             <span class="item-text">Modo oscuro</span>
           </div>
-        </a>
+        </a> -->
         <mat-accordion>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
