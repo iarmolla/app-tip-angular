@@ -15,7 +15,8 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup
   profilePicture: any
   submitted = false;
-  
+  hidePassword: boolean = true;
+  hidePasswordTwo: boolean = true;
   constructor(private authService: AuthService, private imageService: ImageService,public dialogRef: MatDialogRef<ProfileComponent>, private tipService: TipService) {
     this.profileForm = new FormGroup({
       email: new FormControl(window.localStorage.getItem('email'), [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'), Validators.required]),
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+  
   onFileSelected(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
