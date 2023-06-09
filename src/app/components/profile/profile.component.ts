@@ -3,7 +3,7 @@ import { getIdToken } from '@angular/fire/auth';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
-import { ImagesService } from 'src/app/services/images.service';
+import { ImageService } from 'src/app/services/image.service';
 import { TipService } from 'src/app/services/tip.service';
 
 @Component({
@@ -15,8 +15,8 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup
   profilePicture: any
   submitted = false;
-  profileImage: any
-  constructor(private authService: AuthService ,private imageService: ImagesService, public dialogRef: MatDialogRef<ProfileComponent>, private tipService: TipService) {
+  
+  constructor(private authService: AuthService, private imageService: ImageService,public dialogRef: MatDialogRef<ProfileComponent>, private tipService: TipService) {
     this.profileForm = new FormGroup({
       email: new FormControl(window.localStorage.getItem('email'), [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'), Validators.required]),
       password: new FormControl('', [Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/), Validators.required]),
@@ -24,17 +24,22 @@ export class ProfileComponent implements OnInit {
     })
   }
   ngOnInit(): void {
-    this.imageService.image$.subscribe((value: string) => {
-      this.profilePicture = value
-    })
+    const id = window.localStorage.getItem('auth')
+    if (id) {
+      this.tipService.getUserById(id).subscribe((user: any) => {
+        console.log(user);
+        console.log(user);
+        this.profilePicture = user.profileImage || this.imageService.getImage
+      })
+    }
   }
   onFileSelected(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
       this.profilePicture = reader.result as string;
-      window.localStorage.setItem('profilePicture', this.profilePicture);
-      this.imageService.image$.next(this.profilePicture)
+      const id = window.localStorage.getItem('auth')
+      this.tipService.changeProfileImage(this.profilePicture, id)
     };
     reader.readAsDataURL(file);
   }

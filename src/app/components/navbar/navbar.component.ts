@@ -6,8 +6,8 @@ import { ProfileComponent } from '../profile/profile.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TipService } from 'src/app/services/tip.service';
-import { ImagesService } from 'src/app/services/images.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +21,7 @@ export class NavbarComponent {
   help: boolean = false
   public darkMode = false;
   profilePicture: any;
-  constructor(private imageService: ImagesService, private authService: AuthService, private tipService: TipService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog, private router: Router) {
+  constructor(private authService: AuthService, private imageService: ImageService, private tipService: TipService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog, private router: Router) {
     this.isHandset$ = this.breakpointObserver.observe([Breakpoints.HandsetPortrait, Breakpoints.HandsetLandscape])
       .pipe(
         map(result => result.matches)
@@ -32,9 +32,12 @@ export class NavbarComponent {
     }
   }
   ngOnInit() {
-    this.imageService.image$.subscribe((value: string) => {
-      this.profilePicture = value
-    })
+    const id = window.localStorage.getItem('auth')
+    if (id) {
+      this.tipService.getUserById(id).subscribe((user: any) => {
+        this.profilePicture = user.profileImage || this.imageService.getImage
+      })
+    }
     this.themeService._darkMode.subscribe((value) => {
       this.darkMode = value;
     });
