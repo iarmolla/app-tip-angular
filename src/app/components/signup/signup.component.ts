@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
         })
       }).catch((error: any) => {
         console.log(error)
-        this.message = 'Ocurrio un error al registrarse'
+        this.message = 'Ocurrió un error al registrarse'
       })
     }
   }

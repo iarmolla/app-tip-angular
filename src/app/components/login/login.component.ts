@@ -30,7 +30,7 @@ export class LoginComponent {
         this.message = ''
         this.router.navigate(['/'])
       }).catch((error) => {
-        this.message = 'Ocurrio un error al iniciar sesión'
+        this.message = 'Ocurrió un error al iniciar sesión'
       })
     }
   }
@@ -41,7 +41,7 @@ export class LoginComponent {
       this.message = ''
       this.tipServices.getUser(res.user).then(() => this.router.navigate(['/']))
     }).catch((error) => {
-      this.message = 'Ocurrio un error al iniciar sesión con Google'
+      this.message = 'Ocurrió un error al iniciar sesión con Google'
     })
   }
 }
