@@ -13,20 +13,11 @@
         </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
-        <mat-label>Contraseña</mat-label>
-        <input formControlName="password" matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Ingrese su contraseña">
-        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="hidePassword ? 'Mostrar contraseña' : 'Ocultar contraseña'">
-            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </button>
-        <mat-error *ngIf="f.password.touched && f.password.errors || submitted && f.password.errors "
-            class="invalid-feedback">
-            <span *ngIf="f.password.errors.required">La contraseña es un campo requerido</span>
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
         <mat-label>Nueva contraseña</mat-label>
-        <input formControlName="newPassword" matInput [type]="hidePasswordTwo ? 'password' : 'text'" placeholder="Ingrese su nueva contraseña">
-        <button mat-icon-button matSuffix (click)="hidePasswordTwo = !hidePasswordTwo" [attr.aria-label]="hidePasswordTwo ? 'Mostrar contraseña' : 'Ocultar contraseña'">
+        <input formControlName="newPassword" matInput [type]="hidePasswordTwo ? 'password' : 'text'"
+            placeholder="Ingrese su nueva contraseña">
+        <button mat-icon-button matSuffix (click)="hidePasswordTwo = !hidePasswordTwo"
+            [attr.aria-label]="hidePasswordTwo ? 'Mostrar contraseña' : 'Ocultar contraseña'">
             <mat-icon>{{ hidePasswordTwo ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
         <mat-error *ngIf="f.newPassword.touched && f.newPassword.errors || submitted && f.newPassword.errors "
@@ -36,6 +27,9 @@
                 menos una letra mayúscula, una letra minúscula y un número</span>
         </mat-error>
     </mat-form-field>
+    <mat-error class="invalid-feedback" *ngIf="error != ''">
+        <span>{{error}}</span>
+    </mat-error>
     <div class="form-submit">
         <button mat-raised-button mat-dialog-close>Cancelar</button>
         <button mat-raised-button color="primary">Guardar</button>
