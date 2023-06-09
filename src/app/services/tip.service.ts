@@ -70,6 +70,14 @@ export class TipService {
 			}
 		});
 	}
+	async changeProfileImage(image: any, id: any) {
+		console.log(image);
+		console.log(id);
+		const userRef = doc(this.firestore, `users/${id}`);
+		const user = await firstValueFrom(this.getUserById(id))
+		user.profileImage = image
+		return await updateDoc(userRef, { ...user });
+	}
 	getUsers(): Observable<User[]> {
 		const ref = collection(this.firestore, 'users')
 		return collectionData(ref, { idField: 'id' }) as Observable<any>
