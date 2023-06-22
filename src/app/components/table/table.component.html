@@ -1,4 +1,10 @@
 <div class="container-responsive">
+  <div class="icon-generate">
+    <span>Agregar pedido</span>
+    <button mat-icon-button color="primary" (click)="addOrder('0ms', '0ms')">
+      <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+    </button>
+  </div>
     <table>
       <thead>
         <tr>
@@ -8,6 +14,9 @@
           <th scope="col">Pago</th>
           <th scope="col">Propina</th>
           <th scope="col">Fecha</th>
+          <button mat-icon-button color="primary" (click)="addOrder('0ms', '0ms')">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
         </tr>
       </thead>
       <tbody>
@@ -19,9 +28,6 @@
           <td data-label="Propina">{{data.tip | currency}}</td>
           <td data-label="Fecha">{{data.date}}</td>
           <td data-label="actions" class="responsive-icons">
-            <button mat-icon-button color="primary" (click)="addOrder('0ms', '0ms')">
-              <mat-icon aria-label="Add">add</mat-icon>
-            </button>
             <button mat-icon-button color="accent" (click)="edit('0ms', '0ms', data)">
               <mat-icon aria-label="Edit">edit</mat-icon>
             </button>
