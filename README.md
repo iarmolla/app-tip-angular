@@ -1,27 +1,24 @@
-# Delivery
+# Tippit - Control de Propinas y Pagos de Pedidos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+Tippit es una página web desarrollada con Angular que te permite llevar un registro de las propinas recibidas por los repartidores y gestionar el pago de los pedidos de tus clientes de manera sencilla y eficiente.
 
-## Development server
+## Características
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Registro de propinas: Los repartidores podrán ingresar las propinas recibidas durante sus entregas, y la plataforma mantendrá un historial de las mismas para un fácil seguimiento.
 
-## Code scaffolding
+## Requisitos del sistema
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Antes de comenzar a utilizar Tippit, asegúrate de cumplir con los siguientes requisitos:
 
-## Build
+- Navegador web moderno (Google Chrome, Mozilla Firefox, etc.).
+- Conexión a internet.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instalación
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Clona este repositorio en tu máquina local.
+- git clone https://github.com/iarmolla/tippit-angular
+- cd FrontEnd
+- Instala las dependencias del proyecto.
+- npm install
+- npm start
+- La aplicación debería estar disponible en http://localhost:4200.
