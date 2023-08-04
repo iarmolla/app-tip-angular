@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { TipService } from 'src/app/services/tip.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteComponent } from '../dialogs/delete/delete.component';
-import { EditComponent } from '../dialogs/edit/edit.component';
-import { RegisterComponent } from '../register/register.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Order } from 'src/app/interfaces/order';
+import { DeleteComponent } from 'src/app/components/dialogs/delete/delete.component';
+import { EditComponent } from 'src/app/components/dialogs/edit/edit.component';
+import { RegisterComponent } from 'src/app/components/register/register.component';
 
 @Component({
   selector: 'app-home',

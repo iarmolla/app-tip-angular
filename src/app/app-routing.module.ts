@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { HomeComponent } from './pages/home/home.component';
 // import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard'
 
 
