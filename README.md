@@ -17,7 +17,6 @@ Antes de comenzar a utilizar Tippit, asegúrate de cumplir con los siguientes re
 
 - Clona este repositorio en tu máquina local.
 - git clone https://github.com/iarmolla/tippit-angular
-- cd FrontEnd
 - Instala las dependencias del proyecto.
 - npm install
 - npm start
