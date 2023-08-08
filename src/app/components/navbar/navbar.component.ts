@@ -19,6 +19,7 @@ export class NavbarComponent {
   isHandset$
   isLoggedIn: boolean = false;
   help: boolean = false
+  img = '../../../assets/user.jpg'
   public darkMode = false;
   profilePicture: any;
   constructor(private authService: AuthService, private imageService: ImageService, private tipService: TipService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService, public dialog: MatDialog, private router: Router) {

@@ -3,7 +3,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-toolbar>
       <div class="profile">
-        <img src={{profilePicture}} alt="Imagen de perfil">
+        <img src={{profilePicture||img}}>
         <span class="item-text item-text-profile">{{email}}</span>
       </div>
     </mat-toolbar>
